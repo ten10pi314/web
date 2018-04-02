@@ -57,3 +57,16 @@ Note: On MySQL 5.7, column Password is called authentication_string.
 Step 7: Please execute this command.
 
 FLUSH PRIVILEGES;
+
+
+
+
+
+
+
+
+
+
+
+ Sudoserviceapache2start
+ /lampp/lamppstart
