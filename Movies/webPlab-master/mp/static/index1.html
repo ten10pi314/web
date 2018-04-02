@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login/Register</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style type="text/css">
+		
+		label {
+		
+		    display: inline-block;
+		    float: left;
+		    clear: right;
+		    width: 45%;
+		    text-align: right;
+		}
+
+		#sf {
+
+			display: inline-block;
+		    float: left;
+		    clear: right;
+			width: 57%;
+			text-align: right;
+		}
+
+		input {
+		
+		  display: inline-block;
+		  float: left;
+		}
+
+	</style>
+</head>
+<body>
+		<h1 align="center">Login/Register</h1>
+		<div id="GPcontent" align="center">
+			<label>Email:</label>
+			<input type="text" id="email" placeholder="Enter your email"><br> <br>
+			<label>Password:</label>
+			<input type="password" id="passwd" placeholder="Enter your password"> <br> <br>
+			<div id="regDiv"></div>
+			<div align="center"> <label id="sf"></label> </div> <br> <br>
+			<button id="login" onclick="chkCred()">Login</button>
+			<button id="register" onclick="addCred()">Register</button> 
+		</div>
+		<script>
+			
+			var currentUser = "";
+			$(window).on('load', function () {
+  				//alert("Window Loaded");
+				getUser();
+				if(currentUser!="no")
+					document.location.href="http://localhost:5000/index2.html"
+			});
+			function chkCred()
+			{
+				document.getElementById("sf").innerHTML = "";
+				$(document).ready(function() {
+
+						var email = document.getElementById("email").value;
+						var passwd = document.getElementById("passwd").value;	
+						//alert(email+" "+passwd);
+						var url = "/login"
+						var xhttp = new XMLHttpRequest();
+						xhttp.open("POST", url, false);
+						xhttp.send(email);
+						var orgPasswd = xhttp.responseText;
+						//alert(orgPasswd);
+						if(orgPasswd != "wrongEmail" && passwd === orgPasswd)
+						{
+							var str = "Login Successfull!";
+							str = str.fontcolor("green");
+							document.getElementById("sf").innerHTML = str;
+							$(document).ready(function() {
+								alert("Redirecting to main page...");
+								document.location.href = "http://localhost:5000/index2.html"
+							});
+						}
+						else
+						{
+							var str = "Incorrect Username/Password!";
+							str = str.fontcolor("red");
+							document.getElementById("sf").innerHTML = str;
+						}
+				});
+			}
+
+			function getUser()
+			{
+				var url = "/getUser";
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("POST", url, false);
+				xmlHttp.send();
+				var user = xmlHttp.responseText;
+				currentUser = user;
+			}
+
+			function addCred()
+			{
+				var regDiv = $("#regDiv");
+				document.getElementById("sf").innerHTML = "";
+				var lbl = document.getElementById("reP");
+				if(lbl!=null)
+				{
+					finalChk();
+				}
+				else
+				{
+					regDiv.html("");
+					regDiv.append('<label id="reP">Re-enter Password:</label><input type="password" id="rePasswd" placeholder="Re-enter password"> <br> <br>')
+					document.getElementById("sf").innerHTML = "";
+					finalChk();
+				}
+				
+			}
+
+			function finalChk()
+			{
+				$(document).ready(function() {
+
+							var email = document.getElementById("email").value;
+							var passwd = document.getElementById("passwd").value;
+							var cPasswd = document.getElementById("rePasswd").value;
+	    					if( email!="" && cPasswd === passwd)
+							{
+								var url = "/register"
+								var params = email+"&"+cPasswd;
+								var xhttp = new XMLHttpRequest();
+								xhttp.open("POST", url, false);
+								xhttp.send(params);
+								var str = "Registration Successfull!";
+								str = str.fontcolor("green");
+								document.getElementById("sf").innerHTML = str;
+								$(document).ready(function() {
+									alert("\nRedirecting to main page...");
+									document.location.href = "http://localhost:5000/index2.html"
+								});
+								
+							}
+							else
+							{
+								if(cPasswd!="" && email!="")
+								{
+									var str = "Passwords didn't match! Try Again!";
+									str = str.fontcolor("red");
+									document.getElementById("sf").innerHTML = str;
+								}
+							}
+							
+					});
+			}
+
+
+
+		</script>	
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Transactions</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style type="text/css">
+		.topcorner {
+			position:absolute;
+   			top:0;
+   			right:0;
+		}
+	</style>
+</head>
+<body>
+		<h1 align="center">Transactions.</h1>
+		<div class="topcorner" id="userD"></div>
+		<div id="tList" align="center"> </div>
+		<script type="text/javascript">
+
+			var currentUser = "";
+			$(window).on('load', function () {
+  				//alert("Window Loaded");
+				getUser();
+				getTransactions();
+			});
+			function getUser()
+			{
+				var url = "/getUser";
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("POST", url, false);
+				xmlHttp.send();
+				var user = xmlHttp.responseText;
+				currentUser = user;
+				//alert(user);
+				var userDiv = $('#userD');
+				userDiv.append('<label>Logged in as : <b>'+user+'</b> </label>');
+			}
+			function getTransactions()
+			{
+				var url = "/getTransactions"
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("POST", url, false);
+				xmlHttp.send(currentUser);
+				var transactions = xmlHttp.responseText;
+				var result = $('#tList');
+				//alert(transactions);
+				transactions = transactions.split(",");
+				//alert(transactions.length);
+				result.html("");
+				for (var i = 0; i < transactions.length-1; i++) {
+					var transaction = transactions[i];
+					transaction = transaction.split("*");
+					var mobile = transaction[0];
+					var plan = transaction[1];
+					var timeStamp = transaction[2];
+					var label = "Mobile Number : "+mobile.bold()+"<br>Plan Chosen : "+plan.bold()+"<br>Time Stamp : "+timeStamp.bold()+"<br>";
+					result.append('<label> Transaction : '+(String(i+1)).bold()+"<br>"+label+'</label><br><br>');
+				}
+				
+
+			}
+		</script>
+</body>
+</html>

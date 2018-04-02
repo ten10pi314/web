@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>Second Question</title>
+	<script type="text/javascript">
+		
+		function displayArr(){
+			var a=[["vikraman","2015503564"], 
+					["Akshay","2015503005"], 
+					["Deepak","2015503009"], 
+					["Timothy","2015503561"]];
+			var aa="";
+			for(var i=0;i<a.length;i++){
+				aa+="Name :: "+a[i][0]+"\tRoll Number :: "+a[i][1]+"\n";
+			}
+			document.getElementById("content").innerHTML = aa;
+		}
+
+	</script>
+</head>
+<body>
+	<pre id="content"></pre>
+	<button type="button" onclick="displayArr()">Display!!</button>
+</body>
+</html>

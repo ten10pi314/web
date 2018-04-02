@@ -1,0 +1,70 @@
+<html>
+<head>
+	<title>First Question</title>
+</head>
+<script type="text/javascript">
+	var radio="";
+	function validate(){
+		var ms = "";
+		ms += "Name :: "+document.myForm.firstname.value+"\n";
+		ms += "Address :: "+document.myForm.address.value+"\n";
+		ms += "Email ID :: "+document.myForm.emailID.value+"\n";
+		ms += "What you liked the most about the campus ::\n"
+		var x=document.getElementsByClassName("liked")
+		for(i=0;i<x.length;i++){
+			if(x[i].checked){
+				ms+="\t"+x[i].value+"\n";
+			}
+		}
+		ms += "How you became interested in the University ::\n"
+		ms+="\t"+radio+"\n";
+		ms += "Additional Comments ::\n";
+		ms += "\t"+document.myForm.comments.value+"\n";
+		document.getElementById("cc").innerHTML="<html><head><title>hello</title></head><body><pre id='out'></pre></body></html>";
+		document.getElementById("out").innerHTML = ms;	
+	}
+	function Reset(){
+		selection=[0,0,0,0,0];
+		stu=0; loc=0; cam=0; at=0; spo=0;
+		radio="";
+		document.location.href = "1.html";
+	}
+</script>
+
+<body id="cc">
+	<h1 align="center"> Feedback Form </h1> 
+	<div class="container">
+		<form name="myForm" onsubmit="validate()">
+			<font  size=3>
+			<p align="center">
+				Name
+				<input type="text" onfocus="this.value=''" value="Enter Name" name="firstname"> <br> <br>
+				Address
+				<input type="text" onfocus="this.value=''" value="Enter your address" name="address"> <br><br>
+				Email ID
+				<input type="text" onfocus="this.value=''" value="Enter Email ID" name="emailID"> <br><br>
+				What you liked the most about the campus <br>
+				<input type="checkbox" name="stud" class="liked" value="Student">Students</input><br>
+				<input type="checkbox" name="loc" class="liked" value="Location">Location</input><br>
+				<input type="checkbox" name="campus" class="liked" value="Campus">Campus</input><br>
+				<input type="checkbox" name="atm" class="liked" value="Atmosphere">Atmosphere</input><br>
+				<input type="checkbox" name="sports" class="liked" value="Sports">Sports</input><br>
+				How you became interested in the University <br>
+				<input type="radio" name="interest" onclick="radio='Friends'">Friends</input> <br>
+				<input type="radio" name="interest" onclick="radio='Television'">Television</input> <br>
+				<input type="radio" name="interest" onclick="radio='Internet'">Internet</input> <br>
+				<input type="radio" name="interest" onclick="radio='Others'">Others</input> <br>
+				Additional Comments <br>
+				<input type="text" onfocus="this.value=''" value="Enter Additional comments" name="comments"> 
+			</p>
+			<p align="center">
+				<input type="submit" value="Submit">
+			</p>
+			</font>
+		</form>
+		<p align="center">
+			<button onclick="Reset()">Reset</button>
+		</p>
+	</div>
+</body>
+</html>

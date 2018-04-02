@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Capitalize</title>
+	</head>
+	<body>
+		<p id="here" align="center"></p>
+		<script>
+			var str=prompt("Enter the sentence:")
+			var flag=true;
+			var re=/^[a-zA-Z]$/
+			var ans="";
+			for(var i=0;i<str.length;i++)
+			{
+				if(flag && re.test(str[i]))
+				{
+					flag=false;
+					ans=ans+str[i].toUpperCase()
+					continue;
+				}
+				if(!re.test(str[i]))
+				{
+					flag=true;
+				}
+				ans=ans+str[i]
+			}
+			//alert(ans)
+			document.getElementById("here").innerHTML="<h3>Capitalized sentence is: </h3><p>"+ans+"</p>"
+		</script>
+	</body>
+</html>

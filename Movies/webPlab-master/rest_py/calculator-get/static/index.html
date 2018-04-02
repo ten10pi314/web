@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Simple ReSTful Calculator</title>
+</head>
+<body>
+<h2>Simple ReSTful Calculator</h2>
+<form>
+Output: <input type="text" id="op" readonly><br/>
+Get Student Name : <input type="text" id="getN"> <br/>
+Delete Student : <input type="text" id="del"> <br/>
+Update Name(rollno, name) : <input type="text" id="upd"> <br/>
+Create Student(rollno, name) : <input type="text" id="crt"> <br/> 
+
+<p align="center">
+	<input type="button" value="Get Student Name" id="getS" onclick="GetStudent()">
+	<input type="button" value="Delete Student" id="delS" onclick="DelStudent()">
+	<input type="button" value="Update Name" id="updS" onclick="UpdStudent()">
+	<input type="button" value="Create Student" id="crS" onclick="CreateStudent()">
+</p>
+</form>
+<script type="text/javascript">
+	function rest_add(){
+	var a = parseInt(document.getElementById("x").value);
+	var b = parseInt(document.getElementById("y").value);
+	var url = "/add/"+a+"&"+b;
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("GET",url,false);
+	xmlHttp.send(null);
+	document.getElementById("op").value = xmlHttp.responseText;
+	}
+
+
+	function GetStudent()
+	{
+		var a = parseInt(document.getElementById("getN").value);
+		var url = '/getS/{"a":'+a+"}";
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open("GET", url, false);
+		xmlHttp.send();
+		document.getElementById("op").value = xmlHttp.responseText;
+	}
+	function DelStudent()
+	{
+		var a = parseInt(document.getElementById("del").value);
+		var url = '/delS/{"a":'+a+"}";
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open("GET", url, false);
+		xmlHttp.send();
+		document.getElementById("op").value = xmlHttp.responseText;
+	}
+	function UpdStudent()
+	{
+		var a = (document.getElementById("upd").value).split(",");
+		var rollno=a[0];
+		var name=a[1];
+		var url = '/updS/{"a":'+parseInt(rollno)+',"b":"'+name+'"}';
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open("GET", url, false);
+		xmlHttp.send();
+		document.getElementById("op").value = xmlHttp.responseText;	
+	}
+	function CreateStudent()
+	{
+		var a = (document.getElementById("crt").value).split(",");
+		var rollno=a[0];
+		var name=a[1];
+		var url = '/crtS/{"a":'+parseInt(rollno)+',"b":"'+name+'"}';
+		alert(url);
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open("GET", url, false);
+		xmlHttp.send();
+		document.getElementById("op").value = xmlHttp.responseText;	
+	}
+
+
+</script>
+</body>
+</html>

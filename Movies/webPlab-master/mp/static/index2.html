@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mobile Recharge</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style type="text/css">
+		.topcorner {
+			position:absolute;
+   			top:0;
+   			right:0;
+		}
+	</style>
+</head>
+<body>	
+		<h1 align="center">Mobile Recharge</h1>
+		<div class="topcorner" id="userD"></div>
+			<div  align="center">
+			  	<label>Choose carrier:</label>
+				  	<select id="carriers">
+					    <option>Airtel</option>
+					    <option>Jio</option>
+					    <option>Vodafone</option>
+				  	</select>
+				 <br> <br>
+				<button type="button" id="getP" onclick="showPlans()">Get Plans</button>
+				<button type="button" onclick="getTransactions()">View Transactions</button>
+				<br> <br>
+				<input type="text" id="mobileNo" placeholder="Enter the mobile number">
+			</div>
+			<br> <br>
+			<div id="result"> </div>
+			<br> <br> <br>
+			<div align="center"> <button onclick="logoutUtil()">Logout</button> </div>
+			
+	<script>
+
+			var planChosen = "";
+			var currentUser = "";
+			
+			$(window).on('load', function () {
+  				//alert("Window Loaded");
+				getUser();
+			});
+
+			function getTransactions() 
+			{
+				document.location.href="http://localhost:5000/transactions.html/"
+			}
+
+			function getUser()
+			{
+				var url = "/getUser";
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("POST", url, false);
+				xmlHttp.send();
+				var user = xmlHttp.responseText;
+				currentUser = user;
+				//alert(user);
+				var userDiv = $('#userD');
+				userDiv.append('<label>Logged in as : <b>'+user+'</b> </label>');
+			}
+
+			function showPlans()
+			{
+				var carriers = document.getElementById("carriers");
+				var carrier = carriers.options[carriers.selectedIndex].text;
+				//alert(carrier);
+				var url = "/getPlans";
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("POST",url,false);
+				xmlHttp.send(carrier);
+				var plans = xmlHttp.responseText;
+				var result = $('#result');
+				//alert(plans);
+				plans = plans.split(",");
+				//alert(plans.length);
+				result.html("");
+				for (var i = 0; i < plans.length-1; i++) {
+					var plan = plans[i];
+					plan = plan.split(":");
+					var name = plan[0];
+					if(i==0)
+						planChosen=name;
+					var benefit = plan[1];
+					var cost = plan[2];
+					var label = "Plan Name : "+name+" Benefits : "+benefit+" Cost : "+cost;
+					result.append('<label><input type="radio" name="vals" value='+name+' /> ' + label +'</label><br><br>');
+				}
+				result.append('<div align="center"> <button type="button" onclick="addTransaction()">Proceed to Payment</button> </div>');
+				document.querySelectorAll('[name=vals]')[0].checked = true;
+			}
+
+			function logoutUtil()
+			{
+				var url = "/logout";
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("POST", url, false);
+				xmlHttp.send();	
+				var x = xmlHttp.responseText;
+				document.location.href = "http://localhost:5000/index1.html"
+			}
+
+			function addTransaction()
+			{
+				var mobile = document.getElementById("mobileNo").value;
+				if(mobile === "")
+					alert("Enter the mobile number!");
+				else
+				{
+					var url = "/addTransaction";
+					var xmlHttp = new XMLHttpRequest();
+					var params = currentUser+"&"+mobile+"&"+planChosen;
+					xmlHttp.open("POST",url,false);
+					xmlHttp.send(params);
+					alert("Redirecting to Payment Portal...\nPlan Chosen : "+planChosen);
+			}
+
+			$(document).on('change', 'input', function() {
+			  		var elem = $(this);
+			  		if (elem.is(':checked')) {
+			  			//alert(elem.val());
+			    		planChosen=elem.val();
+			  		}
+				});
+		}
+	</script>
+			
+</body>
+</html>

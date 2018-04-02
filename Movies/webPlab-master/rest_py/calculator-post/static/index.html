@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Simple ReSTful Calculator</title>
+</head>
+<body>
+<h2>Simple ReSTful Calculator</h2>
+<form>
+Variable-X: <input type="text" id="x"><br/>
+Variable-Y: <input type="text" id="y"><br/>
+Output: <input type="text" id="op" readonly><br/>
+
+<input type="button" value="ADD" name="add" onclick="rest_add()">
+<input type="button" value="SUB" name="sub" onclick="rest_sub()">
+<input type="button" value="MUL" name="mul" onclick="rest_mul()">
+<input type="button" value="DIV" name="div" onclick="rest_div()">
+
+
+</form>
+<script type="text/javascript">
+	function rest_add(){
+	var a = parseInt(document.getElementById("x").value);
+	var b = parseInt(document.getElementById("y").value);
+	var url = "/add";
+	var params = a+"&"+b;
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("POST",url,false);
+	xmlHttp.send(params);
+	document.getElementById("op").value = xmlHttp.responseText;
+	}
+	
+	function rest_sub(){
+	var a = parseInt(document.getElementById("x").value);
+	var b = parseInt(document.getElementById("y").value);
+	var url = "/sub";
+	var params = a+"&"+b;
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("POST",url,false);
+	xmlHttp.send(params);
+	document.getElementById("op").value = xmlHttp.responseText;
+	}
+
+	function rest_mul(){
+	var a = parseInt(document.getElementById("x").value);
+	var b = parseInt(document.getElementById("y").value);
+	var url = "/mul";
+	var params = a+"&"+b;
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("POST",url,false);
+	xmlHttp.send(params);
+	document.getElementById("op").value = xmlHttp.responseText;
+	}
+
+	function rest_div(){
+	var a = parseInt(document.getElementById("x").value);
+	var b = parseInt(document.getElementById("y").value);
+	var url = "/div";
+	var params = a+"&"+b;
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("POST",url,false);
+	xmlHttp.send(params);
+	document.getElementById("op").value = xmlHttp.responseText;
+	}
+
+</script>
+</body>
+</html>

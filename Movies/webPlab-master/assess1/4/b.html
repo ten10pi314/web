@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Date</title>
+	<script type="text/javascript">
+		function check()
+		{
+			var x=document.getElementById('date')
+			var mydate=x.value.split('-')
+			var currdate=new Date()
+			if(mydate[0]==currdate.getFullYear())
+			{
+				if(mydate[1]<=currdate.getMonth()+2)
+				{
+					if(mydate[2]<=currdate.getDate())
+					{
+						document.getElementById("here").innerHTML="Accepted";
+						return;
+					}
+
+				}
+			}
+			document.getElementById("here").innerHTML="Error";
+		}
+	</script>
+</head>
+<body>
+	<div align="center" id="here">
+		<form onsubmit="check()">
+			<input type="date" name="date" id="date"/><br />
+			<input type="submit" name="Submit" />
+		</form>
+	</div>
+</body>
+</html>

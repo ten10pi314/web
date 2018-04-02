@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE student_xml [
+	<!ELEMENT student_xml (student,branch,department,course,branch_course,enrolls)>
+	<!ELEMENT student (rollno,name,dob,gender,doa,bcode)>
+	<!ELEMENT branch (bcode,bname,dno)>
+	<!ELEMENT department (dno,dname)>
+	<!ELEMENT course (ccode,cname,credits,dno)>
+	<!ELEMENT branch_course (bcode,ccode,semester)>
+	<!ELEMENT enrolls (rollno,ccode,sess,grade)>
+	<!ELEMENT rollno (#PCDATA)>
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT dob (#PCDATA)>
+	<!ELEMENT gender (#PCDATA)>
+	<!ELEMENT doa (#PCDATA)>
+	<!ELEMENT bcode (#PCDATA)>
+	<!ELEMENT bname (#PCDATA)>
+	<!ELEMENT dno (#PCDATA)>
+	<!ELEMENT dname (#PCDATA)>
+	<!ELEMENT ccode (#PCDATA)>
+	<!ELEMENT cname (#PCDATA)>
+	<!ELEMENT credits (#PCDATA)>
+	<!ELEMENT semester (#PCDATA)>
+	<!ELEMENT sess (#PCDATA)>
+	<!ELEMENT grade (#PCDATA)>
+]>
+<?xml-stylesheet type="text/xsl" href="a.xsl"?>
+<student-xml>
+	<student>
+		<rollno>2015503561</rollno>
+		<name>Timothy</name>
+		<dob>27-01-1998</dob>
+		<gender>Male</gender>
+		<doa>12-07-2015</doa>
+		<bcode>35</bcode>
+	</student>
+	<branch>
+		<bcode>35</bcode>
+		<bname>Computer Science and Engineering</bname>
+		<dno>3</dno>
+	</branch>
+	<department>
+		<dno>4</dno>
+		<dname>Department of Computer Technology</dname>
+	</department>
+	<course>
+		<ccode>CS7612</ccode>
+		<cname>Web Technology Lab</cname>
+		<credits>2</credits>
+		<dno>3</dno>
+	</course>
+	<course>
+		<ccode>CS7512</ccode>
+		<cname>Web Programming</cname>
+		<credits>3</credits>
+		<dno>4</dno>
+	</course>
+	<branch_course>
+		<bcode>35</bcode>
+		<ccode>CS7612</ccode>
+		<semester>6</semester>
+	</branch_course>
+	<branch_course>
+		<bcode>35</bcode>
+		<ccode>CS7512</ccode>
+		<semester>6</semester>
+	</branch_course>
+	<enrolls>
+		<rollno>2015503561</rollno>
+		<ccode>CS7612</ccode>
+		<sess>FEB2018</sess>
+		<grade>S</grade>
+	</enrolls>
+	<enrolls>
+		<rollno>2015503561</rollno>
+		<ccode>CS7512</ccode>
+		<sess>FEB2018</sess>
+		<grade>U</grade>
+	</enrolls>
+</student-xml>

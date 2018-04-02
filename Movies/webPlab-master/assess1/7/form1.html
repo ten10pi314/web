@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form</title>
+	<meta charset="utf-8" />
+	<script type="text/javascript" src="script.js" > </script>
+</head>
+<body>
+<font color=orange size=7>
+<h3 align="center">Payment Information </h3> 
+</font>
+<div class="container">
+<form name="myForm" onsubmit="return validate()">
+<p align="center">
+		<div id="radiogrp">
+			<input type="radio" id="r1" name="card" value="cc" > Credit Card <br> <br> 
+			<input type="radio" id="r2" name="card" value="pp" > PayPal <br> <br>
+	    </div>
+	    <br> <br>
+			<select id="cardType">
+				<option value="visa">Visa</option>
+				<option value="mastercard">MasterCard</option>
+				<option></option>
+			</select>
+			<input type="text"  placeholder="Enter Mobile Number" name="mobile"> 
+			<br> <br>
+			Expiration Date:
+			<input type="date" id="date" placeholder="Card Expiry date"> 
+			<br> <br>
+			First Name:
+			<input type="text" placeholder="First Name" name="fname"> <br> <br>
+			Last Name:
+			<input type="text"  placeholder="Last Name" name="lname"> <br> <br> 
+			City:
+			<input type="text"  placeholder="City" name="city"> <br> <br> 
+			Country:
+			<input type="text"  placeholder="Country" name="country"> <br> <br> 
+			Address Type:
+			<input type="text"   placeholder="Home/Business/Other" name="addrT"> <br> <br> 
+			Enter the address:
+			<input type="text"   placeholder="Street Name" name="street"> <br> <br>
+			<input type="text" placeholder="Locality" name="locality"> <br> <br>
+			<input type="text"   placeholder="Zip Code" name="zip"> <br> <br>	
+</p>
+	<p align="center">
+	<input type="submit" value="Submit">
+	</p>
+</form>
+</div>
+</body>
+</html>
